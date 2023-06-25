@@ -56,15 +56,16 @@ spec:
   selector:
     app: springboot
 ---
-# Mongo RC with host path Volume
-apiVersion: v1
-kind: ReplicationController
+# Mongo Deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: mongo-controller
+  name: mongo-deployment
 spec:
   replicas: 1
   selector:
-    app: mongo
+    matchLabels:
+      app: mongo
   template:
     metadata:
       labels:
@@ -86,15 +87,8 @@ spec:
                   key: password
           ports:
             - containerPort: 27017
-          volumeMounts:
-            - name: mongo-persistent-storage
-              mountPath: /data/db
-      volumes:
-        - name: mongo-persistent-storage
-          hostPath:
-            path: /tmp/dbbackup
 ---
-# Mongo Node Port RC
+# Mongo Service
 apiVersion: v1
 kind: Service
 metadata:
