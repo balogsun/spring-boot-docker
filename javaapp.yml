@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: javawebappcontainer
-        image: mylandmarktech/java-web-app
+        image: aewejedevs/java-web-app
         ports:
         - containerPort: 8080 
 ---
